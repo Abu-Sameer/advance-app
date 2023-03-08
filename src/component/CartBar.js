@@ -19,7 +19,8 @@ export default function CartBar(props) {
             mapCart={mapCart}
             deleteFromCart={props.deleteFromCart}
             editFromCart={props.editFromCart}
-            setCartCount={props.setCartCount}
+            setSelectCount={props.setSelectCount}
+            setQuantity={props.setQuantity}
           />
         ))}
       </tbody>

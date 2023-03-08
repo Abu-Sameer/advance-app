@@ -3,12 +3,17 @@ import CartBar from './CartBar';
 import CreateCart from './CreateCart';
 import './UserCart.css';
 
+// const realCart = localStorage.getItem('my cart')
+//   ? JSON.parse(localStorage.getItem('my cart'))
+//   : [];
+
 const realCart = localStorage.getItem('my cart')
   ? JSON.parse(localStorage.getItem('my cart'))
   : [];
 export default function UserCart() {
   const [cart, setCart] = React.useState({ realCart });
-  const [cartCount, setCartCount] = React.useState(0);
+  const [selectCount, setSelectCount] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(0);
 
   function createNewCart(rCart) {
     if (rCart.trim() === '') {
@@ -35,17 +40,22 @@ export default function UserCart() {
 
   return (
     <div className="cart-main">
-      <h2>Shoping Cart Application</h2>
+      <h1>Shopping Cart Application</h1>
       <div className="count-amount">
         Amount of item selected:{' '}
-        <span>{cartCount <= 0 ? 'Zero' : cartCount} </span>
+        <span>{selectCount <= 0 ? 'Zero' : selectCount} </span>
+      </div>
+      <div className="count-quantity">
+        Quantity of all item selected:{' '}
+        <span>{quantity <= 0 ? 'Zero' : quantity} </span>
       </div>
       <CreateCart createNewCart={createNewCart} />
       <CartBar
         realCart={realCart}
         deleteFromCart={deleteFromCart}
         editFromCart={editFromCart}
-        setCartCount={setCartCount}
+        setSelectCount={setSelectCount}
+        setQuantity={setQuantity}
       />
     </div>
   );

@@ -15,24 +15,23 @@ export default function Carts(props) {
 
   function AddCart() {
     setCount((prev) => prev + 1);
+    props.setQuantity((prev) => prev + 1);
     if (count === 0) {
-      props.setCartCount((prev) => prev + 1);
+      props.setSelectCount((prev) => prev + 1);
     }
   }
 
   function MinusCart() {
     setCount((prev) => prev - 1);
-    if (count <= 0) {
-      setCount((prev) => (prev = 0));
-    }
+    props.setQuantity((prev) => prev - 1);
     if (count === 1) {
-      props.setCartCount((prev) => prev - 1);
+      props.setSelectCount((prev) => prev - 1);
     }
   }
 
   function deleteCart() {
     props.deleteFromCart(props.id);
-    props.setCartCount((prev) => prev - 1);
+    props.setSelectCount((prev) => prev - 1);
   }
 
   function handleSubmit(e) {
@@ -46,7 +45,7 @@ export default function Carts(props) {
 
   function resetAll() {
     setCount((prev) => (prev = 0));
-    props.setCartCount((prev) => prev - 1);
+    props.setSelectCount((prev) => prev - 1);
   }
 
   return (
@@ -90,7 +89,11 @@ export default function Carts(props) {
             <button className="plus" onClick={AddCart}>
               +
             </button>
-            <button className="minus" onClick={MinusCart}>
+            <button
+              disabled={count <= 0 ? true : false}
+              className="minus"
+              onClick={MinusCart}
+            >
               -
             </button>
             <button
